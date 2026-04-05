@@ -6,8 +6,9 @@
     "outDir": "./dist",
     "strict": true,
     "esModuleInterop": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "types": ["node"]
   },
-  "include": ["src"],
+  "include": ["src", "tsup.config.ts", "tests"],
   "exclude": ["node_modules", "dist", "tests"]
 }

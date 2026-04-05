@@ -1,16 +1,13 @@
-import { outro } from '@clack/prompts'
+import picocolors from 'picocolors'
 import { askPrompts } from './prompts.js'
+import { generateProject } from './generator.js'
 
 async function main() {
   const choices = await askPrompts()
-  
-  console.log('\nChoices summary:')
-  console.log(JSON.stringify(choices, null, 2))
-
-  outro('Ready to generate!')
+  await generateProject(choices)
 }
 
 main().catch((err) => {
-  console.error('An error occurred:', err)
+  console.error(picocolors.red('\nAn error occurred:'), err instanceof Error ? err.message : err)
   process.exit(1)
 })
