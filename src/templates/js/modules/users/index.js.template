@@ -1,2 +1,8 @@
-export * from './users.routes.js';
-export * from './users.service.js';
+import { Module } from 'nodulus-core'
+
+Module('users', {
+  imports: [],
+  exports: ['UserService'],
+})
+
+export { UserService } from './users.service.js'
