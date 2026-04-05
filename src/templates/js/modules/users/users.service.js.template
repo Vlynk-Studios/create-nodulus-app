@@ -1,3 +1,9 @@
-export const getUsers = () => {
-    return [{ id: 1, name: 'User 1' }];
-};
+import { Service } from 'nodulus-core'
+
+Service('UserService', { module: 'users' })
+
+export class UserService {
+  static findAll() {
+    return [{ id: 1, name: 'John' }]
+  }
+}
