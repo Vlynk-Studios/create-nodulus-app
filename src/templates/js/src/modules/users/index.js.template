@@ -1,8 +1,19 @@
 import { Module } from 'nodulus-core'
 
+/**
+ * Declare this module and its public contract.
+ *
+ * - imports: other module names this module depends on.
+ * - exports: names that other modules can consume from this one.
+ *
+ * Each name in `exports` MUST match a real named export below.
+ * Nodulus verifies this at bootstrap — a mismatch throws EXPORT_MISMATCH.
+ */
 Module('users', {
   imports: [],
   exports: ['UserService'],
 })
 
+// Re-export every name declared in `exports` above.
+// Removing a re-export while keeping the name in `exports` will throw at startup.
 export { UserService } from './users.service.js'
