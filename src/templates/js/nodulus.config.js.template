@@ -1,6 +1,6 @@
 const config = {
   modules: 'src/modules/*',
-  prefix: '/api',
+  prefix: '/api/',
   strict: process.env.NODE_ENV !== 'production',
 }
 

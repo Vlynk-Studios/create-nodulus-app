@@ -4,7 +4,11 @@ import { createApp } from 'nodulus-core'
 const app = express()
 app.use(express.json())
 
-const { routes } = await createApp(app)
+const { routes } = await createApp(app, {
+  modules: 'src/modules/*',
+  prefix: '/api/',
+})
+
 console.log(`Mounted ${routes.length} route(s)`)
 
 app.listen(3000, () => {
