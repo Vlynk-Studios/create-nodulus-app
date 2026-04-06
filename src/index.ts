@@ -1,13 +1,11 @@
-import picocolors from 'picocolors'
 import { askPrompts } from './prompts.js'
 import { generateProject } from './generator.js'
 
-async function main() {
+try {
   const choices = await askPrompts()
   await generateProject(choices)
-}
-
-main().catch((err) => {
-  console.error(picocolors.red('\nAn error occurred:'), err instanceof Error ? err.message : err)
+} catch (err) {
+  // Error is already handled internally in generator.ts with s.stop()
+  // but we throw to ensure exit with code 1 if anything fails
   process.exit(1)
-})
+}

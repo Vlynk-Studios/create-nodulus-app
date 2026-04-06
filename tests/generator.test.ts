@@ -71,7 +71,7 @@ describe('Generator', () => {
   it('should throw error if directory already exists', async () => {
     const choices = { projectName: 'existing-project', language: 'ts' as const }
     const projectPath = join(tempDir, 'existing-project')
-    mkdirSync(projectPath) // Crear la carpeta exactamente con ese nombre
+    mkdirSync(projectPath) // Create the folder with that exact name
 
     await expect(generateProject(choices)).rejects.toThrow('Directory "existing-project" already exists.')
   })

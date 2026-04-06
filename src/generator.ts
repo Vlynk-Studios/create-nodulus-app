@@ -6,9 +6,8 @@ import picocolors from 'picocolors'
 import type { UserChoices } from './prompts.js'
 
 /**
- * Resuelve la ruta absoluta al directorio de templates según el lenguaje.
- * Se asume que el archivo compilado estará en dist/index.js y los 
- * templates en dist/templates/
+ * Resolves the absolute path to the templates directory based on the language.
+ * Assumes the compiled file is in dist/index.js and templates are in dist/templates/
  */
 export function resolveTemplatesDir(language: 'ts' | 'js'): string {
   const __filename = fileURLToPath(import.meta.url)
@@ -18,7 +17,7 @@ export function resolveTemplatesDir(language: 'ts' | 'js'): string {
 }
 
 /**
- * Reemplaza todas las ocurrencias de {{key}} con vars[key] en el contenido provisto.
+ * Replaces all occurrences of {{key}} with vars[key] in the provided content.
  */
 export function interpolate(content: string, vars: Record<string, string>): string {
   return content.replace(/\{\{(\w+)\}\}/g, (match, key) => {
@@ -27,8 +26,8 @@ export function interpolate(content: string, vars: Record<string, string>): stri
 }
 
 /**
- * Lee un template, aplica interpolación y lo escribe en el destino.
- * Maneja el renombrado de .template y gitignore.template.
+ * Reads a template, applies interpolation, and writes it to the destination.
+ * Handles renaming of .template and gitignore.template.
  */
 export function copyTemplate(src: string, dest: string, vars: Record<string, string>): void {
   const content = readFileSync(src, 'utf-8')
@@ -43,21 +42,21 @@ export function copyTemplate(src: string, dest: string, vars: Record<string, str
     finalDest = dest.replace('.template', '')
   }
 
-  // Asegurar que el directorio de destino existe
+  // Ensure destination directory exists
   mkdirSync(dirname(finalDest), { recursive: true })
 
   writeFileSync(finalDest, interpolated)
 }
 
 /**
- * Crea la estructura de directorios base para el nuevo proyecto.
+ * Creates the base directory structure for the new project.
  */
 export function createDirectoryStructure(projectPath: string): void {
   mkdirSync(join(projectPath, 'src/modules/users'), { recursive: true })
 }
 
 /**
- * Función principal que orquestra la generación del proyecto.
+ * Main function orchestrating the project generation.
  */
 export async function generateProject(choices: UserChoices): Promise<void> {
   const projectPath = join(process.cwd(), choices.projectName)
@@ -75,7 +74,7 @@ export async function generateProject(choices: UserChoices): Promise<void> {
 
     createDirectoryStructure(projectPath)
 
-    // Recorrer recursivamente templates/[language] y copiar cada archivo
+    // Recursively traverse templates/[language] and copy each file
     const files = readdirSync(templatesDir, { recursive: true }) as string[]
     
     for (const file of files) {

@@ -5,10 +5,13 @@ import { join } from "node:path";
 export default defineConfig({
   entry: ["src/index.ts"],
   format: ["esm"],
+  dts: false,
+  sourcemap: false,
   clean: true,
-  bundle: true,
+  target: 'node20',
+  banner: { js: '#!/usr/bin/env node' },
   async onSuccess() {
-    // Copiar templates de src a dist después de una compilación exitosa
+    // Copy templates from src to dist after a successful build
     cpSync(
       join(process.cwd(), "src/templates"),
       join(process.cwd(), "dist/templates"),
