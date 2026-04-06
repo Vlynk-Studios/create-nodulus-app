@@ -48,12 +48,6 @@ export function copyTemplate(src: string, dest: string, vars: Record<string, str
   writeFileSync(finalDest, interpolated)
 }
 
-/**
- * Creates the base directory structure for the new project.
- */
-export function createDirectoryStructure(projectPath: string): void {
-  mkdirSync(join(projectPath, 'src/modules/users'), { recursive: true })
-}
 
 /**
  * Main function orchestrating the project generation.
@@ -72,7 +66,6 @@ export async function generateProject(choices: UserChoices): Promise<void> {
     const templatesDir = resolveTemplatesDir(choices.language)
     const vars = { projectName: choices.projectName }
 
-    createDirectoryStructure(projectPath)
 
     // Recursively traverse templates/[language] and copy each file
     const files = readdirSync(templatesDir, { recursive: true }) as string[]

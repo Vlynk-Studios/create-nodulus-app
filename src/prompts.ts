@@ -1,4 +1,4 @@
-import { intro, text, select, cancel, isCancel, group } from '@clack/prompts'
+import { intro, text, select, cancel, group } from '@clack/prompts'
 
 export interface UserChoices {
   projectName: string

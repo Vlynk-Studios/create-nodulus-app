@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "express": "^5.0.0",
-    "nodulus-core": "latest"
+    "nodulus-core": "^1.0.0"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
