@@ -6,11 +6,12 @@
     "node": ">=20.6.0"
   },
   "scripts": {
-    "dev": "node --watch src/app.js",
-    "start": "node src/app.js"
+    "dev": "npx nodulus dev --watch src/app.js",
+    "setup": "npx nodulus sync-preload",
+    "start": "node --import ./.nodulus/preload.js src/app.js"
   },
   "dependencies": {
-    "express": "^5.0.0",
-    "nodulus-core": "^1.0.0"
+    "@vlynk-studios/nodulus-core": "^1.5.0",
+    "express": "^5.0.0"
   }
 }

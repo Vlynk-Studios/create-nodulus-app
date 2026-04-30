@@ -1,16 +1,28 @@
 import express from 'express'
-import { createApp } from 'nodulus-core'
+import { createApp, NodulusError } from '@vlynk-studios/nodulus-core'
 
 const app = express()
 app.use(express.json())
 
-const { routes } = await createApp(app, {
-  modules: 'src/modules/*',
-  prefix: '/api/',
-})
+try {
+  const nodulus = await createApp(app, {
+    modules: 'src/modules/*',
+    prefix: '/api/',
+  })
 
-console.log(`Mounted ${routes.length} route(s)`)
+  if (!nodulus.runtime.preloaderActive) {
+    console.warn('[Nodulus] Pre-loader not detected. Run: npm run setup')
+  }
 
-app.listen(3000, () => {
-  console.log('Server running on http://localhost:3000')
-})
+  console.log(`Mounted ${nodulus.routes.length} route(s)`)
+  app.listen(3000, () => {
+    console.log('Server running on http://localhost:3000')
+  })
+} catch (err) {
+  if (err instanceof NodulusError) {
+    console.error(`[${err.code}] ${err.message}`)
+    if (err.details) console.error(err.details)
+    process.exit(1)
+  }
+  throw err
+}

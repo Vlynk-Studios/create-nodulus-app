@@ -1,4 +1,4 @@
-import { Service } from 'nodulus-core'
+import { Service } from '@vlynk-studios/nodulus-core'
 
 Service('UserService', { module: 'users' })
 

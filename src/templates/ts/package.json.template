@@ -6,17 +6,18 @@
     "node": ">=20.6.0"
   },
   "scripts": {
-    "dev": "npx tsx --watch src/app.ts",
-    "start": "node --experimental-transform-types src/app.ts"
+    "dev": "npx nodulus dev --watch --runtime tsx src/app.ts",
+    "setup": "npx nodulus sync-preload && npx nodulus sync-tsconfig",
+    "start": "node --import ./.nodulus/preload.js --experimental-transform-types src/app.ts"
   },
   "dependencies": {
-    "express": "^5.0.0",
-    "nodulus-core": "^1.0.0"
+    "@vlynk-studios/nodulus-core": "^1.5.0",
+    "express": "^5.0.0"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
     "@types/node": "^20.0.0",
     "tsx": "^4.0.0",
-    "typescript": "^5.0.0"
+    "typescript": "^5.4.5"
   }
 }

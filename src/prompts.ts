@@ -13,7 +13,7 @@ export function validateProjectName(value: string | undefined) {
 }
 
 export async function askPrompts(): Promise<UserChoices> {
-  intro('create-nodulus-app v1.0.0')
+  intro('create-nodulus-app — targeting @vlynk-studios/nodulus-core v1.5.0')
 
   const project = await group(
     {
